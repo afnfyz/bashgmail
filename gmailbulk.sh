@@ -4,11 +4,17 @@
 --------------------
 Author: Afnan
 Date: 03/07/2023
+
 Description:
+
+Allows you to send bulk emails using Gmail's api.
+Prior to using this script you  need to set up a project on Google's 
+cloud console turn on gmail's api and then provision a refresh token.
+
 --------------------
 '
 
-# TO EMAIL
+# TO EMAILS Seperate multiple emails with a space"
 email_array=()
 
 # Set the email content
@@ -24,6 +30,7 @@ for email in ${email_array[@]}
 do
 
 # Construct the email message
+# Content-Type: text/html; charset=UTF-8
 EMAIL=$(cat <<EOF
 From: ${FROM_EMAIL}
 To: ${email}

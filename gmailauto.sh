@@ -4,7 +4,13 @@
 --------------------
 Author: Afnan
 Date: 03/07/2023
-Description:
+
+Description: 
+
+Allows you to send an email using Gmail's api.
+Prior to using this script you  need to set up a project on Google's 
+cloud console turn on gmail's api and then provision a refresh token. 
+
 --------------------
 '
 
@@ -19,7 +25,7 @@ FROM_EMAIL=""
 
 # Set the email subject
 SUBJECT="Automated test"
-
+# Content-Type: text/html; charset=UTF-8 
 # Construct the email message
 EMAIL=$(cat <<EOF
 From: ${FROM_EMAIL}
