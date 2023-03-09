@@ -14,6 +14,16 @@ cloud console turn on gmail's api and then provision a refresh token.
 --------------------
 '
 
+if ! which jq > /dev/null; 
+        then
+  echo ""
+  echo "Error: jq not installed."
+  echo "Please install and try again"
+  echo ""
+  exit
+fi
+
+
 # Set the email content
 EMAIL_CONTENT=$(cat ./email_body.txt)
 
