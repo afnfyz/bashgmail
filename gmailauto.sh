@@ -1,6 +1,6 @@
 #!/bin/bash
 
-: '
+: "
 --------------------
 Author: Afnan
 Date: 03/07/2023
@@ -11,8 +11,9 @@ Allows you to send an email using Gmail's api.
 Prior to using this script you  need to set up a project on Google's 
 cloud console turn on gmail's api and then provision a refresh token. 
 
+Use this script for only one destination email address.
 --------------------
-'
+"
 
 if ! which jq > /dev/null; 
         then

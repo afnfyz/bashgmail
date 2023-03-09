@@ -1,6 +1,6 @@
 #!/bin/bash
 
-: '
+: "
 --------------------
 Author: Afnan
 Date: 03/07/2023
@@ -12,7 +12,8 @@ Prior to using this script you  need to set up a project on Google's
 cloud console turn on gmail's api and then provision a refresh token.
 
 --------------------
-'
+"
+
 if ! which jq > /dev/null; 
         then
   echo ""
@@ -22,16 +23,17 @@ if ! which jq > /dev/null;
   exit
 fi
 
-:'
-If you want to set the destination email addresses automatically form a file
-you can modify this loop in accordance to your file
+
+: "
+# If you want to set the destination email addresses automatically form a file
+# you can modify this loop in accordance to your file
 i=0
 while IFS=, read -r name num mail; do
   name_array[i++]=$name
   number_array[i++]=$num
   email_array[i++]=$mail
 done < ~/Downloads/test.csv
-'
+"
 
 # If you want to set destination email addresses manually add them here 
 # seperated with a space.
