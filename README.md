@@ -5,6 +5,9 @@ Once you provision the script with a refresh token, your client ID and client se
 
 #### Go through these steps:
 - Edit the email_body.txt file with the message you want to send.
+
+<img width="596" alt="email_body" src="https://user-images.githubusercontent.com/124072294/223895350-5f5fc59e-4151-4a3b-a304-0687527a8f16.png">
+
 - Open the script and edit the subject of the email to your liking and choose the source and the destination email(s).  
 - Then you can run the script.
 
