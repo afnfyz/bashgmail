@@ -18,7 +18,7 @@ if ! which jq > /dev/null;
         then
   echo ""
   echo "Error: jq not installed."
-  echo "Please install and try again"
+  echo "Please install and try again."
   echo ""
   exit
 fi
