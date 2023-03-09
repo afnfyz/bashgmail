@@ -22,8 +22,20 @@ if ! which jq > /dev/null;
   exit
 fi
 
-# TO EMAILS Seperate multiple emails with a space
-email_array=()
+:'
+If you want to set the destination email addresses automatically form a file
+you can modify this loop in accordance to your file
+i=0
+while IFS=, read -r name num mail; do
+  name_array[i++]=$name
+  number_array[i++]=$num
+  email_array[i++]=$mail
+done < ~/Downloads/test.csv
+'
+
+# If you want to set destination email addresses manually add them here 
+# seperated with a space.
+# email_array=()
 
 # Set the email content
 EMAIL_CONTENT=$(cat ./email_body.txt)
