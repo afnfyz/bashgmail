@@ -24,6 +24,11 @@ if ! which jq > /dev/null;
   exit
 fi
 
+if [[ "$OSTYPE" == "darwin"* ]]; then
+  BASE64_COMMAND="base64 -b 0"
+else
+  BASE64_COMMAND="base64 -w 0"
+fi
 
 # Set the email content
 EMAIL_CONTENT=$(cat ./email_body.txt)

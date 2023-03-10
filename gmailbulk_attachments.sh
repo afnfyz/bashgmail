@@ -1,19 +1,14 @@
-#!/bin/bash
-
 : "
 --------------------
 Author: Afnan
 Date: 03/07/2023
-
 Description:
-
 Allows you to send bulk emails using Gmail's api.
 Prior to using this script you  need to set up a project on Google's 
 cloud console turn on gmail's api and then provision a refresh token.
-
 --------------------
 "
-
+# Check if jq is installed
 if ! which jq > /dev/null; 
         then
   echo ""
@@ -23,6 +18,7 @@ if ! which jq > /dev/null;
   exit
 fi
 
+# Check for OS type
 if [[ "$OSTYPE" == "darwin"* ]]; then
   BASE64_COMMAND="base64 -b 0"
 else
@@ -42,36 +38,60 @@ done < ~/Downloads/test.csv
 "
 
 # If you want to set destination email addresses manually add them here 
-# seperated with a space.
-# email_array=()
-
-# Set the email content
-EMAIL_CONTENT=$(cat ./email_body.txt)
+# separated with a space.
+#email_array=()
 
 # Set the email address for the sender
 FROM_EMAIL=""
 
+# Set the email content
+EMAIL_CONTENT=$(cat ./email_body.txt)
+
 # Set the email subject
 SUBJECT="Multiple email test"
+
+# Set the path of the attachment file
+SCRIPT_DIR="$(dirname "$(readlink -f "$0")")"
+ATTACHMENT_PATH="${SCRIPT_DIR}/attachment.pdf"
 
 for email in ${email_array[@]}
 do
 
-# Construct the email message
+# Base64 encode the attachment file
+ATTACHMENT_ENCODED=$(${BASE64_COMMAND} < "${ATTACHMENT_PATH}")
+
+# Construct the email message with attachment
+
+# Content-Type: multipart/mixed; boundary="mixed-boundary"
+# Content-Disposition: attachment; filename="attachment.pdf"
+# Email content can also be in HTML format 
 # Content-Type: text/html; charset=UTF-8
+
 EMAIL=$(cat <<EOF
 From: ${FROM_EMAIL}
 To: ${email}
 Subject: ${SUBJECT}
+Content-Type: multipart/mixed; boundary="mixed-boundary"
+
+--mixed-boundary
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
 ${EMAIL_CONTENT}
+
+--mixed-boundary
+Content-Type: application/pdf
+Content-Disposition: attachment; filename="attachment.pdf"
+Content-Transfer-Encoding: base64
+
+${ATTACHMENT_ENCODED}
+
+--mixed-boundary--
 EOF
 )
 
 # Base64 encode the email message as URL-safe
-EMAIL_ENCODED=$(echo -n "${EMAIL}" | "${BASE64_COMMAND}")
+EMAIL_ENCODED=$(echo -n "${EMAIL}" | $BASE64_COMMAND)
 
 # Set the permanent refresh token and client ID/secret
 REFRESH_TOKEN=""
@@ -92,4 +112,4 @@ curl \
   --header "Content-Type: application/json" \
   --data "{\"raw\":\"$EMAIL_ENCODED\"}"
 
-done
+done 
