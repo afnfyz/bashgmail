@@ -13,11 +13,7 @@ Once you provision the script with a refresh token, your client ID and client se
 
 - Then you can run the script.
 
-#### Note:
-For Ubuntu systems change the <code> base64 -b </code> to <code> base64 -w </code>
-<img width="722" alt="Screenshot 2023-03-09 at 3 17 21 PM" src="https://user-images.githubusercontent.com/124072294/224146305-40219bda-b395-4716-b39e-511786b63737.png">
-
-#### Also Note: This script requires jq to be installed. 
+#### Note: This script requires jq to be installed. 
 
 On Mac OS run <code> brew install jq </code>
 <img width="1118" alt="Mac_jq" src="https://user-images.githubusercontent.com/124072294/223886205-13576cf2-17dc-46c7-b6cd-7174dbe51cff.png">
